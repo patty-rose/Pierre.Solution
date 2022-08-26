@@ -1,0 +1,56 @@
+@{
+  Layout = "_Layout";
+} 
+
+@using Pierre.Models;
+@model List<Pierre.Models.Flavor>;
+
+<h1>Treats by flavor</h1>
+
+<p>@Html.ActionLink("Add new flavor", "Create")</p>
+
+@if (@Model.Any())
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Flavor name
+        </th>
+        <th>
+          Treat titles
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      @foreach(Flavor flavor in Model)
+      {
+        @Html.HiddenFor(modelFlavor => flavor.FlavorId)
+        <tr>
+          <td>
+            @Html.DisplayFor(modelFlavor => flavor.Name)
+          </td>
+          <td>
+            <ul>
+              @foreach(var join in flavor.JoinEntities)
+              {
+                <li>@Html.ActionLink($"{@join.Treat.Title}", "Details", "Treats", new { id = join.Treat.TreatId })</li>
+              }
+            </ul>
+          </td>
+          <td>
+            @Html.ActionLink("Details", "Details", new { id = flavor.FlavorId }) |
+            @Html.ActionLink("Edit", "Edit", new { id = flavor.FlavorId }) | 
+            @Html.ActionLink("Delete", "Delete", new { id = flavor.FlavorId })
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+else
+{
+  <h3>No flavors have been added yet!</h3>
+}

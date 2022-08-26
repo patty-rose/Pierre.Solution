@@ -1,0 +1,74 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Pierre.Models;
+@using System;
+@model List<Pierre.Models.Treat>;//view has access to the necessary list of Treats.
+
+<h1>Treats</h1>
+
+@if (User.Identity.IsAuthenticated)
+{
+  @if (User.IsInRole("Admin"))
+  {
+    <p>@Html.ActionLink("Add new treat", "Create")</p>
+  }
+}
+
+@if (@Model.Any())
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Treat Title
+        </th>
+        <th>
+          Flavor
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      @foreach(Treat treat in Model)
+      {
+        @Html.HiddenFor(modelTreat => treat.TreatId)
+        <tr>
+          <td>
+            @Html.DisplayFor(modelTreat => treat.Title)
+          </td>
+          <td>
+            <ul>
+              @foreach(var join in treat.JoinEntities)
+              {
+                <li>@Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId })</li>
+              }
+            </ul>
+          </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+              @if (User.IsInRole("Admin"))
+              {
+                <td>
+                @Html.ActionLink("Details", "Details", new { id = treat.TreatId }) |
+                @Html.ActionLink("Add flavor", "AddFlavor", new { id = treat.TreatId }) |
+                @Html.ActionLink("Edit", "Edit", new { id = treat.TreatId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = treat.TreatId })
+                </td>
+              }
+            }
+            else
+            {
+              @Html.ActionLink("Details", "Details", new { id = treat.TreatId })
+            }
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+else
+{
+  <h3>No treats have been added yet!</h3>
+}
