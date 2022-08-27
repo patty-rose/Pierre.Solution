@@ -26,8 +26,11 @@
                               Flavors
                             </a>
                         </li>
-                        <li>@Html.ActionLink("Account", "Index", "Account")</li>
                     </ul>
+                </div>
+                @* LOGIN in NAVBAR *@
+                <div class="login-container">
+                  @await Html.PartialAsync("_NavLogin", new LoginViewModel())
                 </div>
             </div>
         </nav>
