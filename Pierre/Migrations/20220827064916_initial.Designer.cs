@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pierre.Models;
 
-namespace Treats.Migrations
+namespace Pierre.Migrations
 {
     [DbContext(typeof(PierreContext))]
-    [Migration("20220826045931_Initial")]
-    partial class Initial
+    [Migration("20220827064916_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,7 +48,7 @@ namespace Treats.Migrations
                         new
                         {
                             Id = "bf7441ce-98a5-4128-bd17-cb980d1cd2c5",
-                            ConcurrencyStamp = "d409bfea-a3f8-4c49-8255-aa69ac5f7936",
+                            ConcurrencyStamp = "30d0b2ad-3557-40a7-8dfc-bb17f85b740b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -135,6 +135,13 @@ namespace Treats.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3ca56c49-d3c8-4216-8d39-8f03c9db9acf",
+                            RoleId = "bf7441ce-98a5-4128-bd17-cb980d1cd2c5"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -218,6 +225,22 @@ namespace Treats.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3ca56c49-d3c8-4216-8d39-8f03c9db9acf",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f9235144-f760-4649-96a7-40cc0a7c386a",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "PIERRE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEYWckdtiUIhGhKROkR9NoOxG/32vYDvy9FfwCc/KjyicXz8ZAiMC2o5MBkgS0zyGA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c8042504-abd7-4a3f-b08c-a4d17bbb6617",
+                            TwoFactorEnabled = false,
+                            UserName = "Pierre"
+                        });
                 });
 
             modelBuilder.Entity("Pierre.Models.Flavor", b =>

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Pierre.Controllers
 {
-  [AllowAnonymous]
+  [Authorize(Roles = "Admin")]
   public class RoleController : Controller
   {
     private RoleManager<IdentityRole> _roleManager;

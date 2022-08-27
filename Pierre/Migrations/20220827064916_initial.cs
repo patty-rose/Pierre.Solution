@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Treats.Migrations
+namespace Pierre.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -208,7 +208,17 @@ namespace Treats.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "bf7441ce-98a5-4128-bd17-cb980d1cd2c5", "d409bfea-a3f8-4c49-8255-aa69ac5f7936", "Admin", "ADMIN" });
+                values: new object[] { "bf7441ce-98a5-4128-bd17-cb980d1cd2c5", "30d0b2ad-3557-40a7-8dfc-bb17f85b740b", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "3ca56c49-d3c8-4216-8d39-8f03c9db9acf", 0, "f9235144-f760-4649-96a7-40cc0a7c386a", null, false, false, null, null, "PIERRE", "AQAAAAEAACcQAAAAEEYWckdtiUIhGhKROkR9NoOxG/32vYDvy9FfwCc/KjyicXz8ZAiMC2o5MBkgS0zyGA==", null, false, "c8042504-abd7-4a3f-b08c-a4d17bbb6617", false, "Pierre" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "bf7441ce-98a5-4128-bd17-cb980d1cd2c5", "3ca56c49-d3c8-4216-8d39-8f03c9db9acf" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
