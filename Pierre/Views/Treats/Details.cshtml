@@ -37,22 +37,12 @@ else
 
 @if(User.Identity.IsAuthenticated) 
 {
-  <p>@Html.ActionLink("Checkout Treat", "CheckoutTreat", new { id = Model.TreatId})</p>
+  <p>@Html.ActionLink("add treat to cart", "CheckoutTreat", new { id = Model.TreatId})</p>
   
   @if(User.IsInRole("Admin"))
   {
-    <p>@Html.ActionLink("Add an Flavor", "AddFlavor", new { id = Model.TreatId })</p>
+    <p>@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
     <p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
-    <p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.TreatId })</p>
+    <p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
   }
 }
-
-@if(User.Identity.IsAuthenticated)
-    {
-      @if(User.IsInRole("Admin"))
-      {
-        <p>@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
-        <p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
-        <p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
-      }
-    }

@@ -19,11 +19,27 @@ else
   @foreach(var join in Model.JoinEntities)
   {
     <li>@join.Treat.Title</li>
+    @if(User.Identity.IsAuthenticated)
+    {
+      @if(User.IsInRole("Admin"))
+      {
+        @using (Html.BeginForm("DeleteTreat", "Flavors"))
+        {
+          @Html.Hidden("joinId", @join.FlavorTreatId)
+          <input type="submit" value="Delete"/>
+        }
+      }
+    }
   }
   </ul>
 }
-<hr />
-<p>@Html.ActionLink("Add treat", "Create", "Pierre", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Back to list", "Index")</p>
+
+@if(User.Identity.IsAuthenticated) 
+{  
+  @if(User.IsInRole("Admin"))
+  {
+    <p>@Html.ActionLink("Add treat", "AddTreat", new { id = Model.FlavorId })</p>
+    <p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
+    <p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId })</p>
+  }
+}

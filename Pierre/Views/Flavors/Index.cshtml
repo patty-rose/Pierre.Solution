@@ -7,7 +7,14 @@
 
 <h1>Treats by flavor</h1>
 
-<p>@Html.ActionLink("Add new flavor", "Create")</p>
+@if (User.Identity.IsAuthenticated)
+{
+  @if (User.IsInRole("Admin"))
+  {
+    <p>@Html.ActionLink("Add new flavor", "Create")</p>
+  }
+}
+
 
 @if (@Model.Any())
 {
@@ -40,11 +47,24 @@
               }
             </ul>
           </td>
-          <td>
-            @Html.ActionLink("Details", "Details", new { id = flavor.FlavorId }) |
-            @Html.ActionLink("Edit", "Edit", new { id = flavor.FlavorId }) | 
-            @Html.ActionLink("Delete", "Delete", new { id = flavor.FlavorId })
-          </td>
+          @if (User.Identity.IsAuthenticated)
+            {
+              @if (User.IsInRole("Admin"))
+              {
+                <td>
+                @Html.ActionLink("Details", "Details", new { id = flavor.FlavorId })  |
+                @Html.ActionLink("Add treat", "AddTreat", new { id = flavor.FlavorId }) |
+                @Html.ActionLink("Edit", "Edit", new { id = flavor.FlavorId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = flavor.FlavorId })
+                </td>
+              }
+            }
+            else
+            {
+              <td>
+              @Html.ActionLink("Details", "Details", new { id = flavor.FlavorId })
+              </td>
+            }
         </tr>
       }
     </tbody>
