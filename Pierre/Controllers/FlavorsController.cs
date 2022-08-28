@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Pierre.Controllers
 {
+  [Authorize(Roles = "Admin")]
   public class FlavorsController : Controller
   {
     private readonly PierreContext _db;
@@ -18,6 +19,7 @@ namespace Pierre.Controllers
       _db = db;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       List<Flavor> model = _db.Flavors.ToList();
@@ -37,6 +39,7 @@ namespace Pierre.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisFlavor = _db.Flavors
@@ -72,10 +75,6 @@ namespace Pierre.Controllers
       ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Type");
       return View(thisFlavor);
     }
-
-
-
-
 
     [HttpPost]
     public ActionResult AddTreat(Flavor flavor, int TreatId)

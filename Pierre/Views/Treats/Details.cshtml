@@ -36,9 +36,7 @@ else
 }
 
 @if(User.Identity.IsAuthenticated) 
-{
-  <p>@Html.ActionLink("add treat to cart", "CheckoutTreat", new { id = Model.TreatId})</p>
-  
+{  
   @if(User.IsInRole("Admin"))
   {
     <p>@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>

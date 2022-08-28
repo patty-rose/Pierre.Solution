@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Pierre.Controllers
 {
+  [Authorize(Roles = "Admin")]
   public class TreatsController : Controller
   {
     private readonly PierreContext _db;
@@ -27,6 +28,7 @@ namespace Pierre.Controllers
       _logger = logger;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       List<Treat> model = _db.Treats.ToList();
@@ -52,6 +54,7 @@ namespace Pierre.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisTreat = _db.Treats.Include(treat => treat.JoinEntities).ThenInclude(join => join.Flavor).FirstOrDefault(treat => treat.TreatId == id);
@@ -110,25 +113,6 @@ namespace Pierre.Controllers
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
       _db.Treats.Remove(thisTreat);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
-    }
-
-    //cart routes
-    public ActionResult AddTreatToCart(int id)
-    {
-      var thisFlavorTreat = _db.FlavorTreat.FirstOrDefault(flavorTreat => flavorTreat.FlavorTreatId ==id);
-      return View(thisFlavorTreat);
-    }
-
-    [HttpPost]
-    public ActionResult AddTreatToCart(FlavorTreat flavorTreat)
-    {
-      var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-      if (UserId != null && !_db.Cart.Any(model => model.FlavorTreatId == flavorTreat.FlavorTreatId && model.UserId == UserId))
-      {
-        _db.Cart.Add(new Models.Cart() {UserId = UserId, FlavorTreatId = flavorTreat.FlavorTreatId});
-      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
