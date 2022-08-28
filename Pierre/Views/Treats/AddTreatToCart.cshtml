@@ -1,0 +1,17 @@
+@{
+  Layout ="_Layout";
+}
+
+@model Pierre.Models.Treat
+
+<h3>Check out @Model.Type</h3>
+<p>Would you like to check out this treat?</p>
+
+@using(Html.BeginForm())
+{
+  @Html.HiddenFor(model=>model.TreatId)
+
+  <input type= "submit" value= "Checkout this Treat"/>
+}
+
+<p>@Html.ActionLink("Return to Treat List", "Index")</p>

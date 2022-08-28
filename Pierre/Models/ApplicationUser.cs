@@ -11,5 +11,7 @@ namespace Pierre.Models
 {
   public class ApplicationUser : IdentityUser
   {
+    public virtual FlavorTreat FlavorTreat {get; set;}
+    public virtual ICollection<FlavorTreatUser> JoinFlavorTreatUser {get;}
   }
 }

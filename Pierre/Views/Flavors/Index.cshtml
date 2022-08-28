@@ -22,16 +22,15 @@
     <thead>
       <tr>
         <th>
-          Flavor name
+          Available Flavors
         </th>
         <th>
-          Treat titles
+          Treat types
         </th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-
       @foreach(Flavor flavor in Model)
       {
         @Html.HiddenFor(modelFlavor => flavor.FlavorId)
@@ -40,12 +39,19 @@
             @Html.DisplayFor(modelFlavor => flavor.Name)
           </td>
           <td>
-            <ul>
               @foreach(var join in flavor.JoinEntities)
               {
-                <li>@Html.ActionLink($"{@join.Treat.Title}", "Details", "Treats", new { id = join.Treat.TreatId })</li>
+                @Html.ActionLink($"{@join.Treat.Type}", "Details", "Treats", new { id = join.Treat.TreatId })
+                <br>
               }
-            </ul>
+              @if (User.Identity.IsAuthenticated)
+                {
+                  @if (User.IsInRole("Admin"))
+                  {
+                    <br>
+                    @Html.ActionLink("Add more treat types", "AddTreat", new { id = flavor.FlavorId })
+                  }
+                }
           </td>
           @if (User.Identity.IsAuthenticated)
             {
@@ -53,7 +59,6 @@
               {
                 <td>
                 @Html.ActionLink("Details", "Details", new { id = flavor.FlavorId })  |
-                @Html.ActionLink("Add treat", "AddTreat", new { id = flavor.FlavorId }) |
                 @Html.ActionLink("Edit", "Edit", new { id = flavor.FlavorId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = flavor.FlavorId })
                 </td>

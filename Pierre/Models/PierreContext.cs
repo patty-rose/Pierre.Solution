@@ -7,11 +7,14 @@ namespace Pierre.Models
 {
   public class PierreContext : IdentityDbContext<ApplicationUser>
   {
+    //tables
     public DbSet<Treat> Treats { get; set; }
     public DbSet<Flavor> Flavors { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers {get; set;}
 
+    //join tables
     public DbSet<FlavorTreat> FlavorTreat { get; set; }
+    public DbSet<FlavorTreatUser> FlavorTreatUser {get; set;}
 
     public PierreContext(DbContextOptions options) : base(options) { }
 
@@ -20,6 +23,7 @@ namespace Pierre.Models
       optionsBuilder.UseLazyLoadingProxies();
     }
 
+    //seed admin role and admin user
     protected override void OnModelCreating(ModelBuilder builder)
     {
       base.OnModelCreating(builder);

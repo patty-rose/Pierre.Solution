@@ -22,10 +22,13 @@
     <thead>
       <tr>
         <th>
-          Treat Title
+          Price
         </th>
         <th>
-          Flavor
+          Treat Type
+        </th>
+        <th>
+          Available Flavors
         </th>
         <th></th>
       </tr>
@@ -37,15 +40,35 @@
         @Html.HiddenFor(modelTreat => treat.TreatId)
         <tr>
           <td>
-            @Html.DisplayFor(modelTreat => treat.Title)
+            $@Html.DisplayFor(modelTreat => treat.Price)
           </td>
           <td>
-            <ul>
+            @Html.DisplayFor(modelTreat => treat.Type)
+          </td>
+          <td>
               @foreach(var join in treat.JoinEntities)
               {
-                <li>@Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId })</li>
+                @Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId }) <br>
+                @if(User.Identity.IsAuthenticated)
+                {
+                  @if(User.IsInRole("Admin"))
+                  {
+                    @using (Html.BeginForm("DeleteFlavor", "Treats"))
+                    {
+                      @Html.Hidden("joinId", @join.FlavorTreatId)
+                      <input type="submit" value="Delete Flavor"/>
+                    }
+                  }
+                }
               }
-            </ul>
+              @if (User.Identity.IsAuthenticated)
+              {
+                @if (User.IsInRole("Admin"))
+                {
+                  <br>
+                  @Html.ActionLink("Add more flavors", "AddFlavor", new { id = treat.TreatId })
+                }
+              }
           </td>
             @if (User.Identity.IsAuthenticated)
             {
@@ -53,7 +76,6 @@
               {
                 <td>
                 @Html.ActionLink("Details", "Details", new { id = treat.TreatId }) |
-                @Html.ActionLink("Add flavor", "AddFlavor", new { id = treat.TreatId }) |
                 @Html.ActionLink("Edit", "Edit", new { id = treat.TreatId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = treat.TreatId })
                 </td>

@@ -6,14 +6,17 @@
 
 <h2>Edit</h2>
 
-<h4>Edit this treat: @Html.DisplayFor(model => model.Title)</h4>
+<h4>Edit this treat: @Html.DisplayFor(model => model.Type)</h4>
 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.TreatId)
 
-    @Html.LabelFor(model => model.Title)
-    @Html.EditorFor(model => model.Title)
+    @Html.LabelFor(model => model.Type)
+    @Html.EditorFor(model => model.Type)
+
+    @Html.LabelFor(model => model.Price)
+    @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })
 
     <input type="submit" value="Save" />
 }

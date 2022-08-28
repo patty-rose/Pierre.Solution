@@ -1,0 +1,28 @@
+@{
+  Layout ="_Layout";
+}
+
+@using Pierre.Models;
+@model Pierre.Models.ApplicationUser
+
+<h1>@User.Identity.Name's Cart</h1>
+@if (Model.JoinFlavorTreatUser.Count == 0)
+{
+  <p> you have no treats in your cart</p>
+}
+else
+{
+  <table class="table">
+    <tr>
+      <th>Title</th>
+      <th>Checkout Date</th>
+    </tr>
+    @foreach (var join in Model.JoinFlavorTreatUser)
+    {
+      <tr>
+        <td>treat names</td>
+    </tr>
+    }
+  </table>
+}
+

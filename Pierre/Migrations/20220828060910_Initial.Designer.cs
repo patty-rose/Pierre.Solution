@@ -9,8 +9,8 @@ using Pierre.Models;
 namespace Pierre.Migrations
 {
     [DbContext(typeof(PierreContext))]
-    [Migration("20220827074926_AddPrice")]
-    partial class AddPrice
+    [Migration("20220828060910_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,7 +48,7 @@ namespace Pierre.Migrations
                         new
                         {
                             Id = "bf7441ce-98a5-4128-bd17-cb980d1cd2c5",
-                            ConcurrencyStamp = "ddf787e8-617c-40b0-b039-8943b192c183",
+                            ConcurrencyStamp = "a7d7b192-de62-4b44-88e6-4035234d779a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -182,6 +182,9 @@ namespace Pierre.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int?>("FlavorTreatId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -217,6 +220,8 @@ namespace Pierre.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FlavorTreatId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -231,13 +236,13 @@ namespace Pierre.Migrations
                         {
                             Id = "3ca56c49-d3c8-4216-8d39-8f03c9db9acf",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1847227-2dda-4158-bf70-98b7762980e3",
+                            ConcurrencyStamp = "7ff00011-b7d5-4eb9-9771-2889ada0f56b",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "PIERRE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFrqxMRQN79Q2aUq7oGkZaYTBaatSm3EDY9w1Azna+scUbq6oV/Vcjz2zmZ13l7c8A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEshVXvH3M4E7iuWe3ff69CSZkCrwCfsJhRkXEJkLaOZmlMwNEvTS1wx/caf2d289g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ca5f1c07-4330-43a0-8965-df808fa6b940",
+                            SecurityStamp = "904723a1-97ed-4350-be2c-8daffb09043d",
                             TwoFactorEnabled = false,
                             UserName = "Pierre"
                         });
@@ -281,13 +286,37 @@ namespace Pierre.Migrations
                     b.ToTable("FlavorTreat");
                 });
 
+            modelBuilder.Entity("Pierre.Models.FlavorTreatUser", b =>
+                {
+                    b.Property<int>("FlavorTreatUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FlavorTreatId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.HasKey("FlavorTreatUserId");
+
+                    b.HasIndex("FlavorTreatId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FlavorTreatUser");
+                });
+
             modelBuilder.Entity("Pierre.Models.Treat", b =>
                 {
                     b.Property<int>("TreatId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("TreatId");
@@ -346,6 +375,15 @@ namespace Pierre.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Pierre.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Pierre.Models.FlavorTreat", "FlavorTreat")
+                        .WithMany()
+                        .HasForeignKey("FlavorTreatId");
+
+                    b.Navigation("FlavorTreat");
+                });
+
             modelBuilder.Entity("Pierre.Models.FlavorTreat", b =>
                 {
                     b.HasOne("Pierre.Models.Flavor", "Flavor")
@@ -365,9 +403,36 @@ namespace Pierre.Migrations
                     b.Navigation("Treat");
                 });
 
+            modelBuilder.Entity("Pierre.Models.FlavorTreatUser", b =>
+                {
+                    b.HasOne("Pierre.Models.FlavorTreat", "FlavorTreat")
+                        .WithMany("JoinFlavorTreatUser")
+                        .HasForeignKey("FlavorTreatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pierre.Models.ApplicationUser", "User")
+                        .WithMany("JoinFlavorTreatUser")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("FlavorTreat");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Pierre.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("JoinFlavorTreatUser");
+                });
+
             modelBuilder.Entity("Pierre.Models.Flavor", b =>
                 {
                     b.Navigation("JoinEntities");
+                });
+
+            modelBuilder.Entity("Pierre.Models.FlavorTreat", b =>
+                {
+                    b.Navigation("JoinFlavorTreatUser");
                 });
 
             modelBuilder.Entity("Pierre.Models.Treat", b =>

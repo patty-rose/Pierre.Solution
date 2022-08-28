@@ -82,15 +82,12 @@ namespace Pierre.Controllers
     [HttpPost]
     public ActionResult AddFlavor(Treat treat, int FlavorId)
     {
-      //had to remove if FlavorId != 0 clause to get joinId to pass to next controller..
-      FlavorTreat newFT = new FlavorTreat(){FlavorId = FlavorId, TreatId = treat.TreatId};
-      _db.FlavorTreat.Add(newFT);
+      if (FlavorId != 0 && !_db.FlavorTreat.Any(model=> model.FlavorId == FlavorId && model.TreatId == treat.TreatId))
+      {
+        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = treat.TreatId, FlavorId = FlavorId });
+      }
       _db.SaveChanges();
-
-      int joinId = newFT.FlavorTreatId; 
-      _logger.LogInformation(joinId.ToString());  
-
-      return RedirectToAction("AddFlavorTreatPrice", "FlavorTreats", new { id = joinId });
+      return RedirectToAction("Index");
     }
 
     [HttpPost]
