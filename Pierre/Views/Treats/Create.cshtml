@@ -10,7 +10,7 @@
   @Html.LabelFor(model => model.Type)
   @Html.TextBoxFor(model => model.Type)
 
-  @Html.LabelFor(model => model.Price)
+  @Html.Label("Price per treat: $")
   @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })
 
   <input type="submit" value="Add new treat"/>

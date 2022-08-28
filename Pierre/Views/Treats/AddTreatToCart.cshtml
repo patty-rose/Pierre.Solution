@@ -2,16 +2,14 @@
   Layout ="_Layout";
 }
 
-@model Pierre.Models.Treat
+@model Pierre.Models.FlavorTreat
 
-<h3>Check out @Model.Type</h3>
-<p>Would you like to check out this treat?</p>
+<h3>Check out @Model.Flavor.Name @Model.Treat.Type</h3>
+<p>Would you like to add this treat?</p>
 
 @using(Html.BeginForm())
 {
-  @Html.HiddenFor(model=>model.TreatId)
+  @Html.HiddenFor(model=>model.FlavorTreatId)
 
-  <input type= "submit" value= "Checkout this Treat"/>
+  <input type= "submit" value= "add"/>
 }
-
-<p>@Html.ActionLink("Return to Treat List", "Index")</p>

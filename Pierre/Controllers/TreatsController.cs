@@ -113,5 +113,39 @@ namespace Pierre.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    //cart routes
+    public async Task<ActionResult> FlavorTreatUser()
+    {
+
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+
+      var flavorTreatUser = _db.ApplicationUsers
+        .Include(user=> user.JoinFlavorTreatUser)
+        .ThenInclude(join=>join.FlavorTreat)
+
+        .FirstOrDefault(user=>user.Id == currentUser.Id);
+      return View(flavorTreatUser);
+
+    }
+
+    public ActionResult AddTreatToCart(int id)
+    {
+      var thisFlavorTreat = _db.FlavorTreat.FirstOrDefault(flavorTreat => flavorTreat.FlavorTreatId ==id);
+      return View(thisFlavorTreat);
+    }
+
+    [HttpPost]
+    public ActionResult AddTreatToCart(FlavorTreat flavorTreat)
+    {
+      var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+      if (UserId != null && !_db.FlavorTreatUser.Any(model => model.FlavorTreatId == flavorTreat.FlavorTreatId && model.UserId == UserId))
+      {
+        _db.FlavorTreatUser.Add(new Models.FlavorTreatUser() {UserId = UserId, FlavorTreatId = flavorTreat.FlavorTreatId});
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
