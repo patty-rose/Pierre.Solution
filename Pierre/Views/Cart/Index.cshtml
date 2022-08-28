@@ -6,7 +6,7 @@
 @model Pierre.Models.ApplicationUser
 
 <h1>@User.Identity.Name's Cart</h1>
-@if (Model.JoinFlavorTreatUser.Count == 0)
+@if (Model.JoinCart.Count == 0)
 {
   <p> you have no treats in your cart</p>
 }
@@ -17,7 +17,7 @@ else
       <th>Price</th>
       <th>Treat</th>
     </tr>
-    @foreach (var join in Model.JoinFlavorTreatUser)
+    @foreach (var join in Model.JoinCart)
     {
       <tr>
         <td> @join.FlavorTreatId</td>

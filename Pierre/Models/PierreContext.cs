@@ -14,7 +14,7 @@ namespace Pierre.Models
 
     //join tables
     public DbSet<FlavorTreat> FlavorTreat { get; set; }
-    public DbSet<FlavorTreatUser> FlavorTreatUser {get; set;}
+    public DbSet<Cart> Cart {get; set;}
 
     public PierreContext(DbContextOptions options) : base(options) { }
 

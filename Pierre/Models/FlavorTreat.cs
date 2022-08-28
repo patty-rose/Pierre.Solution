@@ -10,7 +10,7 @@ namespace Pierre.Models
         public int FlavorId { get; set; }
         public virtual Treat Treat { get; set; }
         public virtual Flavor Flavor { get; set; }
-        public virtual ICollection<FlavorTreatUser> JoinFlavorTreatUser {get;}
+        public virtual ICollection<Cart> JoinCart {get;}
 
         public FlavorTreat()
         {

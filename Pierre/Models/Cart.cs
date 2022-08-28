@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Pierre.Models
 {
-  public class FlavorTreatUser
+  public class Cart
   {
-    public int FlavorTreatUserId {get; set;}
+    public int CartId {get; set;}
     public int FlavorTreatId {get; set;}
     public string UserId {get; set;}
 

@@ -51,8 +51,16 @@
                 @Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId }) <br>
                 @if(User.Identity.IsAuthenticated)
                 {
-                  <p>@Html.ActionLink("Add to cart", "AddTreatToCart", new { id = join.FlavorTreatId})</p>
-                  
+                  @* WIP cart functionality*@
+                  @* <p>@Html.ActionLink("Add to cart", "AddTreatToCart", new { id = join.FlavorTreatId})</p>
+
+                  @using(Html.BeginForm("AddTreatToCart"))
+                  {
+                    @Html.HiddenFor(new { id = join.FlavorTreatId})
+
+                    <input type= "submit" value= "add to cart"/>
+                  } *@
+
                   @if(User.IsInRole("Admin"))
                   {
                     @using (Html.BeginForm("DeleteFlavor", "Treats"))
