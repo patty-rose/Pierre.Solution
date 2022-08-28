@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Pierre.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Pierre.Controllers
 {
@@ -17,10 +18,13 @@ namespace Pierre.Controllers
 
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public TreatsController(UserManager<ApplicationUser> userManager, PierreContext db)
+    private readonly ILogger<TreatsController> _logger;
+
+    public TreatsController(UserManager<ApplicationUser> userManager, PierreContext db, ILogger<TreatsController> logger)
     {
       _userManager = userManager;
       _db = db;
+      _logger = logger;
     }
 
     public ActionResult Index()
@@ -61,7 +65,7 @@ namespace Pierre.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Treat treat, int FlavorId)
+    public ActionResult Edit(Treat treat)
     {
       _db.Entry(treat).State = EntityState.Modified;
       _db.SaveChanges();
@@ -78,12 +82,15 @@ namespace Pierre.Controllers
     [HttpPost]
     public ActionResult AddFlavor(Treat treat, int FlavorId)
     {
-      if (FlavorId != 0)
-      {
-        _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId });
-        _db.SaveChanges();
-      }
-      return RedirectToAction("Index");
+      //had to remove if FlavorId != 0 clause to get joinId to pass to next controller..
+      FlavorTreat newFT = new FlavorTreat(){FlavorId = FlavorId, TreatId = treat.TreatId};
+      _db.FlavorTreat.Add(newFT);
+      _db.SaveChanges();
+
+      int joinId = newFT.FlavorTreatId; 
+      _logger.LogInformation(joinId.ToString());  
+
+      return RedirectToAction("AddFlavorTreatPrice", "FlavorTreats", new { id = joinId });
     }
 
     [HttpPost]
