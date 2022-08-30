@@ -4,18 +4,15 @@
 
 @model Pierre.Models.Flavor
 
-<h2>Edit</h2>
-
-<h4>Edit this flavor: @Html.DisplayFor(model => model.Name)</h4>
+<h1>Edit flavor: @Html.DisplayFor(model => model.Name)</h1>
+<p>Add or remove treats on the main Flavor Menu page.</p>
 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.FlavorId)
 
     @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)<br><br>
 
     <input type="submit" value="Save" />
 }
-<hr />
-<p>@Html.ActionLink("Back to list", "Index")</p>

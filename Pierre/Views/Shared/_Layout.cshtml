@@ -11,6 +11,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
+                <div class="logo">
+                  <img class="img-fluid bg" src="~/img/transparent-logo.png" alt="pierre's bakery logo" />
+              </div>
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pierre's Treats</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -42,8 +45,12 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Patty Otero
+        <div class="container text-center">
+          <div class="footer-image">
+            <img src="~/img/transparent-logo-text.png" alt="pierre's bakery logo" />
+          <br>
+          </div>
+          &copy; 2022 - Patty Otero
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

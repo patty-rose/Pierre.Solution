@@ -4,16 +4,15 @@
 
 @model Pierre.Models.Treat
 
-<h4>Add a new treat</h4>
+<h1>Add a new Treat to the Menu</h1>
+
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Type)
-  @Html.TextBoxFor(model => model.Type)
+  @Html.TextBoxFor(model => model.Type)<br>
 
   @Html.Label("Price per treat: $")
-  @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })
+  @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })<br><br>
 
   <input type="submit" value="Add new treat"/>
 }
-
-<p>@Html.ActionLink("Show all treats", "Index")</p>

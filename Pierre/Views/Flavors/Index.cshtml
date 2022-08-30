@@ -5,7 +5,7 @@
 @using Pierre.Models;
 @model List<Pierre.Models.Flavor>;
 
-<h1>Treats by flavor</h1>
+<h1>Flavors Menu</h1>
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -36,13 +36,32 @@
         @Html.HiddenFor(modelFlavor => flavor.FlavorId)
         <tr>
           <td>
+            @if(User.Identity.IsAuthenticated)
+            {
+              @if(User.IsInRole("Admin"))
+              {
+                @Html.ActionLink("", "Delete", new {id=($"{flavor.FlavorId}")}, new {@class="fa-solid fa-trash-can"})
+              }
+            }
             @Html.DisplayFor(modelFlavor => flavor.Name)
           </td>
           <td>
               @foreach(var join in flavor.JoinEntities)
               {
-                @Html.ActionLink($"{@join.Treat.Type}", "Details", "Treats", new { id = join.Treat.TreatId })
-                <br>
+                @if(User.Identity.IsAuthenticated)
+                {
+                  @if(User.IsInRole("Admin"))
+                  {
+                    @using (Html.BeginForm("DeleteTreat", "Flavors", FormMethod.Post, new { @class = "delete-form"}))
+                    {
+                      @Html.Hidden("joinId", @join.FlavorTreatId)
+                      <button class="delete-icon" type="submit">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </button> 
+                    } 
+                  }
+                }
+                @Html.ActionLink($"{@join.Treat.Type}", "Details", "Treats", new { id = join.Treat.TreatId }) <br>
               }
               @if (User.Identity.IsAuthenticated)
                 {
@@ -59,8 +78,7 @@
               {
                 <td>
                 @Html.ActionLink("Details", "Details", new { id = flavor.FlavorId })  |
-                @Html.ActionLink("Edit", "Edit", new { id = flavor.FlavorId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = flavor.FlavorId })
+                @Html.ActionLink("Edit", "Edit", new { id = flavor.FlavorId })
                 </td>
               }
             }

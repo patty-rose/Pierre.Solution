@@ -4,18 +4,15 @@
 
 @model Pierre.Models.Flavor
 
-<h2>Add a treat</h2>
-
-<h4>Add a treat to @Html.DisplayFor(model => model.Name)</h4>
+<h1>Add Treat</h1>
+<p>Make <b>@Model.Name</b> an available flavor for another treat.</p>
 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.FlavorId)
 
     @Html.Label("Select treat")
-    @Html.DropDownList("TreatId")
+    @Html.DropDownList("TreatId")<br><br>
 
     <input type="submit" value="Save" />
 }
-
-<p>@Html.ActionLink("Back to list", "Index")</p>

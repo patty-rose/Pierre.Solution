@@ -55,7 +55,8 @@ button.accept-policy {
 -------------------------------------------------- */
 html {
   position: relative;
-  min-height: 100%;
+  width:100%;
+  height:auto;
 }
 
 body {
@@ -63,9 +64,11 @@ body {
   margin-bottom: 60px;
 }
 .footer {
-  position: absolute;
+  margin-top: 60px;
+  position: relative;
   bottom: 0;
   width: 100%;
+  height: auto;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
@@ -88,3 +91,23 @@ title {
   display: inline-block;
 }
 
+.logo{
+  height:auto;
+  margin-right:10px;
+  width:5%;
+}
+
+.footer-image{
+  margin-top: 25px;
+  display: block;
+}
+
+#splash-image{
+  max-width: 100vh;
+  max-height: auto;
+}
+
+.roles-columns{
+  max-width: 75vh;
+  max-height: auto;
+}

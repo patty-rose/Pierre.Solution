@@ -4,11 +4,10 @@
 
 @model Pierre.Models.Treat
 
-<h2>Are you sure you want to delete @Model.Type?</h2>
+<h1>Delete Treat</h1>
+<p>Are you sure you want to delete <b>@Model.Type</b> and all it's information?</p>
 
 @using (Html.BeginForm())
 {
     <input type="submit" value="Delete" />
 }
-<hr />
-@Html.ActionLink("Back to List", "Index")

@@ -6,7 +6,7 @@
 @using System;
 @model List<Pierre.Models.Treat>;//view has access to the necessary list of Treats.
 
-<h1>Treats</h1>
+<h1>Treats Menu</h1>
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -25,7 +25,7 @@
           Price
         </th>
         <th>
-          Treat Type
+          Treat
         </th>
         <th>
           Available Flavors
@@ -43,7 +43,6 @@
             $@Html.DisplayFor(modelTreat => treat.Price)
           </td>
           <td>
-            @Html.DisplayFor(modelTreat => treat.Type)
             @if(User.Identity.IsAuthenticated)
             {
               @if(User.IsInRole("Admin"))
@@ -51,11 +50,11 @@
                 @Html.ActionLink("", "Delete", new {id=($"{treat.TreatId}")}, new {@class="fa-solid fa-trash-can"})
               }
             }
+            @Html.DisplayFor(modelTreat => treat.Type)
           </td>
           <td>
               @foreach(var join in treat.JoinEntities)
               {
-                @Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId })
                 @if(User.Identity.IsAuthenticated)
                 {
                   @if(User.IsInRole("Admin"))
@@ -66,9 +65,10 @@
                       <button class="delete-icon" type="submit">
                         <i class="fa-solid fa-trash-can"></i>
                       </button> 
-                    } <br>
+                    }
                   }
                 }
+                @Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId })<br>
               }
               @if (User.Identity.IsAuthenticated)
               {

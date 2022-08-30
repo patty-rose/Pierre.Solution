@@ -4,21 +4,18 @@
 
 @model Pierre.Models.Treat
 
-<h2>Edit</h2>
-
-<h4>Edit this treat: @Html.DisplayFor(model => model.Type)</h4>
+<h1>Edit Treat: @Html.DisplayFor(model => model.Type)</h1>
+<p>Add or remove flavors on the main Treats Menu page.</p>
 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.TreatId)
 
     @Html.LabelFor(model => model.Type)
-    @Html.EditorFor(model => model.Type)
-
+    @Html.EditorFor(model => model.Type)<br>
+<br>
     @Html.LabelFor(model => model.Price)
-    @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })
+    @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })<br><br>
 
     <input type="submit" value="Save" />
 }
-<hr />
-<p>@Html.ActionLink("Back to list", "Index")</p>
