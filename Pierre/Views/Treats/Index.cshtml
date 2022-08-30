@@ -44,30 +44,29 @@
           </td>
           <td>
             @Html.DisplayFor(modelTreat => treat.Type)
+            @if(User.Identity.IsAuthenticated)
+            {
+              @if(User.IsInRole("Admin"))
+              {
+                @Html.ActionLink("", "Delete", new {id=($"{treat.TreatId}")}, new {@class="fa-solid fa-trash-can"})
+              }
+            }
           </td>
           <td>
               @foreach(var join in treat.JoinEntities)
               {
-                @Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId }) <br>
+                @Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId })
                 @if(User.Identity.IsAuthenticated)
                 {
-                  @* WIP cart functionality*@
-                  @* <p>@Html.ActionLink("Add to cart", "AddTreatToCart", new { id = join.FlavorTreatId})</p>
-
-                  @using(Html.BeginForm("AddTreatToCart"))
-                  {
-                    @Html.HiddenFor(new { id = join.FlavorTreatId})
-
-                    <input type= "submit" value= "add to cart"/>
-                  } *@
-
                   @if(User.IsInRole("Admin"))
                   {
-                    @using (Html.BeginForm("DeleteFlavor", "Treats"))
+                    @using (Html.BeginForm("DeleteFlavor", "Treats", FormMethod.Post, new { @class = "delete-form"}))
                     {
                       @Html.Hidden("joinId", @join.FlavorTreatId)
-                      <input type="submit" value="Delete Flavor"/>
-                    }
+                      <button class="delete-icon" type="submit">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </button> 
+                    } <br>
                   }
                 }
               }
@@ -86,8 +85,7 @@
               {
                 <td>
                 @Html.ActionLink("Details", "Details", new { id = treat.TreatId }) |
-                @Html.ActionLink("Edit", "Edit", new { id = treat.TreatId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = treat.TreatId })
+                @Html.ActionLink("Edit", "Edit", new { id = treat.TreatId })
                 </td>
               }
             }

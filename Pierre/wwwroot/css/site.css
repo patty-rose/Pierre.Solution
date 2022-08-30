@@ -77,3 +77,14 @@ ul{
 title {
   display:none;
 }
+
+.delete-icon {
+  border: none;
+  color: #2766d5;
+  display: inline-block;
+}
+
+.delete-form{
+  display: inline-block;
+}
+
