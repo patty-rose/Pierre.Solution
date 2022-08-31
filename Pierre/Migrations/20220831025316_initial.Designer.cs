@@ -9,7 +9,7 @@ using Pierre.Models;
 namespace Pierre.Migrations
 {
     [DbContext(typeof(PierreContext))]
-    [Migration("20220828153732_initial")]
+    [Migration("20220831025316_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,7 @@ namespace Pierre.Migrations
                         new
                         {
                             Id = "bf7441ce-98a5-4128-bd17-cb980d1cd2c5",
-                            ConcurrencyStamp = "6c39f7c4-bd38-4516-830c-1fdbac58d397",
+                            ConcurrencyStamp = "5a47348f-d6c3-45e0-84d4-504c7f3b162e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -231,13 +231,13 @@ namespace Pierre.Migrations
                         {
                             Id = "3ca56c49-d3c8-4216-8d39-8f03c9db9acf",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1ee79e2-fc24-4821-ac6d-31bf26e43bf2",
+                            ConcurrencyStamp = "dfeb0022-729d-4bfe-a630-3c5b43c77cf2",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "PIERRE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDliL+3Qji/x7aOXoTqhwnqEqkwVs4MZgcvJFeTgWnPJ4RQ2WSqjcHPvoIf84ErC2w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOJGMxn+ozWY94amWLJpWwqcSEOEu3tGPPEOPLY9gqrWgmedivLVsst7FR6wKxPb/Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "78fa5dee-4ae4-47a5-89a8-df063f4b434b",
+                            SecurityStamp = "8f3a17f3-b8b6-4f34-a1c1-5452258e1bc3",
                             TwoFactorEnabled = false,
                             UserName = "Pierre"
                         });

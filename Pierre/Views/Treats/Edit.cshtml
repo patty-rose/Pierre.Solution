@@ -9,13 +9,15 @@
 
 @using (Html.BeginForm())
 {
+  <div class="settings">
     @Html.HiddenFor(model => model.TreatId)
 
     @Html.LabelFor(model => model.Type)
-    @Html.EditorFor(model => model.Type)<br>
-<br>
-    @Html.LabelFor(model => model.Price)
-    @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })<br><br>
+    @Html.EditorFor(model => model.Type)
 
-    <input type="submit" value="Save" />
+    @Html.LabelFor(model => model.Price)
+    @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })
+  </div>
+
+    <input class = "btn btn-secondary" type="submit" value="Save" />
 }

@@ -9,10 +9,11 @@
 
 @using (Html.BeginForm())
 {
+  <div class="settings">
     @Html.HiddenFor(model => model.TreatId)
 
     @Html.Label("Select flavor")
-    @Html.DropDownList("FlavorId")<br><br>
-
-    <input type="submit" value="Save" />
+    @Html.DropDownList("FlavorId")
+  </div>
+    <input class = "btn btn-secondary" type="submit" value="Save" />
 }

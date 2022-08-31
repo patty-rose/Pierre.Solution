@@ -9,10 +9,12 @@
 
 @using (Html.BeginForm())
 {
+  <div class="settings">
     @Html.HiddenFor(model => model.FlavorId)
 
     @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)<br><br>
+    @Html.EditorFor(model => model.Name)
+  </div>
 
-    <input type="submit" value="Save" />
+    <input class = "btn btn-secondary" type="submit" value="Save" />
 }

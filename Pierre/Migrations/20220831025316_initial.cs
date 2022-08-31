@@ -210,12 +210,12 @@ namespace Pierre.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "bf7441ce-98a5-4128-bd17-cb980d1cd2c5", "6c39f7c4-bd38-4516-830c-1fdbac58d397", "Admin", "ADMIN" });
+                values: new object[] { "bf7441ce-98a5-4128-bd17-cb980d1cd2c5", "5a47348f-d6c3-45e0-84d4-504c7f3b162e", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3ca56c49-d3c8-4216-8d39-8f03c9db9acf", 0, "f1ee79e2-fc24-4821-ac6d-31bf26e43bf2", null, false, false, null, null, "PIERRE", "AQAAAAEAACcQAAAAEDliL+3Qji/x7aOXoTqhwnqEqkwVs4MZgcvJFeTgWnPJ4RQ2WSqjcHPvoIf84ErC2w==", null, false, "78fa5dee-4ae4-47a5-89a8-df063f4b434b", false, "Pierre" });
+                values: new object[] { "3ca56c49-d3c8-4216-8d39-8f03c9db9acf", 0, "dfeb0022-729d-4bfe-a630-3c5b43c77cf2", null, false, false, null, null, "PIERRE", "AQAAAAEAACcQAAAAEOJGMxn+ozWY94amWLJpWwqcSEOEu3tGPPEOPLY9gqrWgmedivLVsst7FR6wKxPb/Q==", null, false, "8f3a17f3-b8b6-4f34-a1c1-5452258e1bc3", false, "Pierre" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

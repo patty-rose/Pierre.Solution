@@ -12,9 +12,11 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <div class="logo">
-                  <img class="img-fluid bg" src="~/img/transparent-logo.png" alt="pierre's bakery logo" />
+                  <a href="@Url.Action("Index", "Home")">
+                  <img class="img-fluid bg" alt="Pierre's Bakery Logo, a blue circle with a whisk and spatula inside" src="@Url.Content("~/img/transparent-logo.png")"> 
+                  </a>
               </div>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pierre's Treats</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pierre's </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

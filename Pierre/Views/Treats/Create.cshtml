@@ -8,11 +8,13 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Type)
-  @Html.TextBoxFor(model => model.Type)<br>
+  <div class="settings">
+    @Html.LabelFor(model => model.Type)
+    @Html.TextBoxFor(model => model.Type)
 
-  @Html.Label("Price per treat: $")
-  @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })<br><br>
+    @Html.Label("Price per treat: $")
+    @Html.TextBoxFor(model => model.Price, new { type="number", min="0", max="100" })
+  </div>
 
-  <input type="submit" value="Add new treat"/>
+  <input class = "btn btn-secondary" type="submit" value="Add new treat"/>
 }

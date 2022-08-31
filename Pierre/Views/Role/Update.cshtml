@@ -9,8 +9,8 @@
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form method="post">
-  <input type="hidden" name="roleName" value="@Model.Role.Name" />
-  <input type="hidden" name="roleId" value="@Model.Role.Id" />
+  <input class = "btn btn-secondary" type="hidden" name="roleName" value="@Model.Role.Name" />
+  <input class = "btn btn-secondary" type="hidden" name="roleId" value="@Model.Role.Id" />
   
   <div class="container roles-columns">
   <div class="row">
@@ -29,7 +29,7 @@
             <tr>
               <td>@user.UserName</td>
               <td>
-                <input type="checkbox" name="AddIds" value="@user.Id">
+                <input class = "btn btn-secondary" type="checkbox" name="AddIds" value="@user.Id">
               </td>
             </tr>
           }
@@ -50,7 +50,7 @@
             <tr>
               <td>@user.UserName</td>
               <td>
-                <input type="checkbox" name="DeleteIds" value="@user.Id">
+                <input class = "btn btn-secondary" type="checkbox" name="DeleteIds" value="@user.Id">
               </td>
             </tr>
           }
